@@ -7,7 +7,23 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       acks: all
-      
+      #      retries: 10
+      properties:
+        #        retry:
+        #          backoff:
+        #            ms: 1000
+        delivery:
+          timeout:
+            ms: 120000
+            # the maximum time that producer will wait for entire send operation to complete, including:
+            # - time to send the request
+            # - time waits for ack
+            # - time waits for retry send failures
+        linger:
+          ms: 0
+        request:
+          timeout:
+            ms: 30000 # time the producer can wait after sending a single request
 services:
   products:
     kafka:
