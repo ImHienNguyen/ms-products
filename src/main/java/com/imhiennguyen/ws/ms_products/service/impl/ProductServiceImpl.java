@@ -1,8 +1,8 @@
 package com.imhiennguyen.ws.ms_products.service.impl;
 
+import com.imhiennguyen.ws.core.ProductCreatedEvent;
 import com.imhiennguyen.ws.ms_products.controller.dto.CreateProductRequest;
 import com.imhiennguyen.ws.ms_products.service.ProductService;
-import com.imhiennguyen.ws.ms_products.service.dto.ProductCreatedEvent;
 import com.imhiennguyen.ws.ms_products.service.mapper.ProductCreatedEventMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
 
         log.info("Before publishing a ProductCreatedEvent");
 
-        SendResult<String, ProductCreatedEvent> result = kafkaTemplate.send("topic2", productId, productCreatedEvent).get();
+        SendResult<String, ProductCreatedEvent> result = kafkaTemplate.send(topicName, productId, productCreatedEvent).get();
 
         log.info("Partition: {}", result.getRecordMetadata().partition());
         log.info("Topic: {}", result.getRecordMetadata().topic());
