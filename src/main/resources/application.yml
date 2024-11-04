@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: ms-products
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092, localhost:9094
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+services:
+  products:
+    kafka:
+      topic:
+        name: product-created-events-topic
+        partition: 3
+        replicas: 3
+        min:
+          insync:
+            replicas: 2
+
+server:
+  port: 0
+
