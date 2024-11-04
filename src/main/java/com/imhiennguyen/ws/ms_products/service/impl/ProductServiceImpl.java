@@ -38,6 +38,7 @@ public class ProductServiceImpl implements ProductService {
                 log.info("Message sent successfully, record_data={}", result.getRecordMetadata());
             }
         });
+        log.info("Returning product id");
         return productId;
     }
 }

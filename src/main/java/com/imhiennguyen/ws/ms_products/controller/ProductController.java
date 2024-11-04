@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class ProductController {
 
-    private ProductService productService;
+    private final ProductService productService;
 
     @PostMapping
     public ResponseEntity<String> createProduct(@RequestBody CreateProductRequest request) {
