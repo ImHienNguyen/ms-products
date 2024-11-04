@@ -32,14 +32,11 @@ public class KafkaConfig {
     @Value("${spring.kafka.producer.bootstrap-servers}")
     private String bootstrapServers;
 
-
     @Value("${spring.kafka.producer.key-serializer}")
     private String keySerializer;
 
-
     @Value("${spring.kafka.producer.value-serializer}")
     private String valueSerializer;
-
 
     @Value("${spring.kafka.producer.acks}")
     private String acks;
@@ -53,6 +50,12 @@ public class KafkaConfig {
     @Value("${spring.kafka.producer.properties.request.timeout.ms}")
     private String requestTimeout;
 
+    @Value("${spring.kafka.producer.properties.enable.idempotence}")
+    private String idempotence;
+
+    @Value("${spring.kafka.producer.properties.max.in.flight.requests.per.connection}")
+    private String inFlightRequests;
+
     private Map<String, Object> producerConfigs() {
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
@@ -62,6 +65,8 @@ public class KafkaConfig {
         config.put(ProducerConfig.DELIVERY_TIMEOUT_MS_CONFIG, deliveryTimeout);
         config.put(ProducerConfig.LINGER_MS_CONFIG, linger);
         config.put(ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG, requestTimeout);
+        config.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, idempotence);
+        config.put(ProducerConfig.MAX_IN_FLIGHT_REQUESTS_PER_CONNECTION, inFlightRequests);
         return config;
     }
 
