@@ -22,6 +22,14 @@ spring:
         request:
           timeout:
             ms: 30000 # time the producer can wait after sending a single request
+        enable:
+          idempotence: true
+        max:
+          in:
+            flight:
+              requests:
+                per:
+                  connection: 5
 services:
   products:
     kafka:
